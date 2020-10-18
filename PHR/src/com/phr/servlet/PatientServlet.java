@@ -32,6 +32,12 @@ public class PatientServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String mobile = req.getParameter("mobile");
+		int check = mobile.length();
+		if (check >10 || check<10)
+			resp.sendRedirect("patients.jsp?msg= Error! Please enter valid number");
+		else
+		{
 		try {
 			String type = req.getParameter("reqtype");
 			User user = (User) req.getSession().getAttribute("user");
@@ -98,4 +104,5 @@ public class PatientServlet extends HttpServlet {
 		}
 	}
 
+ }
 }

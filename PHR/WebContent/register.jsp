@@ -127,7 +127,7 @@
 										name="lname" class="form-control" /> <br /> <label>Gender:</label>
 									<br /> <input type="radio" name='gender' value='Male' /> Male
 									<input type="radio" name='gender' value='Female' /> Female <br />
-									<br /> <label>Mobile:</label> <input type="text" name="mobile"
+									<br /> <label>Mobile:</label> <input type="number" name="mobile"
 										class="form-control" /> <br /> <label>Address:</label>
 									<textarea name="addr" rows=3 class="form-control"></textarea>
 									<br />

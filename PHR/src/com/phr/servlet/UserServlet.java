@@ -24,6 +24,13 @@ public class UserServlet extends HttpServlet
 			String request_type = req.getParameter("request_type");
 			if (request_type.equals("register"))
 			{
+				if(req.getParameter("mobile").length()>10 || req.getParameter("mobile").length()<10)
+				{
+					resp.sendRedirect(
+							"register.jsp?msg=Error! Invalid Mobile Number.");
+				}
+				else
+				{
 				User user = new User();
 				String addr = req.getParameter("addr");
 				user.setAddr(addr);
@@ -61,6 +68,7 @@ public class UserServlet extends HttpServlet
 					dao.register(user);
 					resp.sendRedirect("register.jsp?msg=Registration Successful");
 				}
+			}
 			}
 			else if (request_type.equals("login"))
 			{
