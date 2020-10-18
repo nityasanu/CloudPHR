@@ -3,6 +3,10 @@
 	<name>PHR</name>
 	<comment></comment>
 	<projects>
+		<project>bcprov-jdk16-1.46</project>
+		<project>sqlite-jdbc-3.27.2.1</project>
+		<project>mail</project>
+		<project>servlet-api</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

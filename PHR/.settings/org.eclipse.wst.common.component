@@ -3,6 +3,18 @@
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
         <wb-resource deploy-path="/WEB-INF/classes/" source-path="/ImportedClasses"/>
+        <dependent-module archiveName="bcprov-jdk16-1.46.jar" deploy-path="/WEB-INF/lib/" handle="module:/resource/bcprov-jdk16-1.46/bcprov-jdk16-1.46">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="sqlite-jdbc-3.27.2.1.jar" deploy-path="/WEB-INF/lib/" handle="module:/resource/sqlite-jdbc-3.27.2.1/sqlite-jdbc-3.27.2.1">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="mail.jar" deploy-path="/WEB-INF/lib/" handle="module:/resource/mail/mail">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="servlet-api.jar" deploy-path="/WEB-INF/lib/" handle="module:/resource/servlet-api/servlet-api">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="PHR"/>
         <property name="java-output-path" value="/PHR/build/classes"/>
     </wb-module>
