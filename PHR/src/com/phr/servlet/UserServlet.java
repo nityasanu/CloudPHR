@@ -58,8 +58,14 @@ public class UserServlet extends HttpServlet
 				else
 				{
 
-					dao.register(user);
-					resp.sendRedirect("register.jsp?msg=Registration Successful");
+					if(dao.register(user))
+						{
+						resp.sendRedirect("register.jsp?msg=Registration Successful");
+						}
+					else
+					{
+						resp.sendRedirect("register.jsp?msg=email id already exists!!");
+					}
 				}
 			}
 			else if (request_type.equals("login"))

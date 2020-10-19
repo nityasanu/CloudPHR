@@ -47,7 +47,7 @@ public class UserDAO
    }
 
    
-   public void register(User user) throws Exception
+   public boolean register(User user) throws Exception
    {
 
       Connection con = null;
@@ -65,11 +65,12 @@ public class UserDAO
          ps.setString(7, user.getMobile());
          ps.setString(8, user.getAddr());
          ps.execute();
+         return true;
       }
       catch (Exception e)
       {
          e.printStackTrace();
-         throw e;
+         return false;
       }
       finally
       {
