@@ -44,7 +44,12 @@ public class UserServlet extends HttpServlet
 					role = "USER";
 				user.setRole(role);
 
-				if ((addr == null || addr.trim().length() == 0) || (email == null || email.trim().length() == 0)
+				User userexists =dao.getEmailDetails(email);
+				if(userexists!=null)
+				{
+					resp.sendRedirect("register.jsp?msg=Already Registered");
+				}
+				else if ((addr == null || addr.trim().length() == 0) || (email == null || email.trim().length() == 0)
 						|| (fname == null || fname.trim().length() == 0)
 						|| (lname == null || lname.trim().length() == 0)
 						|| (mobile == null || mobile.trim().length() == 0)
@@ -173,7 +178,7 @@ public class UserServlet extends HttpServlet
 		catch (Exception e)
 		{
 			e.printStackTrace();
-			resp.sendRedirect("error.jsp?msg=OOPS! Something went wrong");
+			resp.sendRedirect("register.jsp?msg=Already Registered");
 		}
 	}
 

@@ -111,6 +111,38 @@ public class UserDAO
       }
 
    }
+   public User getEmailDetails(String email) throws Exception
+   {
+      Connection con = null;
+      try
+      {
+         con = DBConnection.connect();
+         PreparedStatement ps = con.prepareStatement("select * from USER where email=? and password=?");
+         ps.setString(1, email);
+         ResultSet rs = ps.executeQuery();
+         rs.next();
+         User user = new User();
+         user.setAddr(rs.getString("addr"));
+         user.setEmail(rs.getString("email"));
+         user.setFname(rs.getString("fname"));
+         user.setLname(rs.getString("lname"));
+         user.setGender(rs.getString("gender"));
+         user.setMobile(rs.getString("mobile"));
+         user.setRole(rs.getString("role"));
+         return user;
+
+      }
+      catch (Exception e)
+      {
+         e.printStackTrace();
+         return null;
+      }
+      finally
+      {
+         con.close();
+      }
+
+   }
 
    
    public void updateProfile(User user) throws Exception
