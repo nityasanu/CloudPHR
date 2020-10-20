@@ -173,7 +173,7 @@ public class UserServlet extends HttpServlet
 		catch (Exception e)
 		{
 			e.printStackTrace();
-			resp.sendRedirect("error.jsp?msg=OOPS! Something went wrong");
+			resp.sendRedirect("register.jsp?msg=Error! Email Already Exists");
 		}
 	}
 
