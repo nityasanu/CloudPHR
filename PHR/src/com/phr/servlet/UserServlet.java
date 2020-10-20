@@ -1,6 +1,8 @@
 package com.phr.servlet;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.phr.dao.UserDAO;
 import com.phr.model.User;
+import com.phr.util.DBConnection;
 
 public class UserServlet extends HttpServlet
 {
@@ -17,13 +20,29 @@ public class UserServlet extends HttpServlet
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
 	{
-		UserDAO dao = new UserDAO();
+		Connection con;
+		int ch=0;
+		try {
+			con = DBConnection.connect();
+			ResultSet rs=con.createStatement().executeQuery("select * from user");
+			while(rs.next())
+			{
+				if(rs.getString("email").equals(req.getParameter("email")))
+						{
+					        ch=1;
+						}
+			}
+		}catch (Exception e) {
+		}
+			UserDAO dao = new UserDAO();
 
 		try
 		{
 			String request_type = req.getParameter("request_type");
 			if (request_type.equals("register"))
 			{
+				if(ch==0)
+				{
 				User user = new User();
 				String addr = req.getParameter("addr");
 				user.setAddr(addr);
@@ -61,6 +80,11 @@ public class UserServlet extends HttpServlet
 					dao.register(user);
 					resp.sendRedirect("register.jsp?msg=Registration Successful");
 				}
+			} else if(ch==1)
+			{
+				resp.sendRedirect(
+						"register.jsp?msg=Error! Email is Already Exist");
+			}
 			}
 			else if (request_type.equals("login"))
 			{
@@ -182,5 +206,4 @@ public class UserServlet extends HttpServlet
 	{
 		doGet(req, resp);
 	}
-
 }

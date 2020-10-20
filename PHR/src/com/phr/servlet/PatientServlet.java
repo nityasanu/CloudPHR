@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Properties;
@@ -20,6 +22,7 @@ import com.phr.mobile.SendMessage;
 import com.phr.model.Patient;
 import com.phr.model.Pin;
 import com.phr.model.User;
+import com.phr.util.DBConnection;
 import com.phr.util.IDGenerator;
 
 public class PatientServlet extends HttpServlet {
@@ -31,8 +34,19 @@ public class PatientServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		try {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {	       
+			Connection con;
+			int ch=0;
+			try {
+				con = DBConnection.connect();
+				ResultSet rs=con.createStatement().executeQuery("select * from patients");
+				while(rs.next())
+				{
+					if(rs.getString("email").equals(req.getParameter("email")))
+							{
+						        ch=1;
+							}
+				}
 			String type = req.getParameter("reqtype");
 			User user = (User) req.getSession().getAttribute("user");
 			PatientDAO pDao = new PatientDAO();
@@ -41,6 +55,8 @@ public class PatientServlet extends HttpServlet {
 				resp.sendRedirect("patients.jsp?msg=Bad Request");
 			} else {
 				if (type.equals("write")) {
+					if(ch==0)
+					{
 					Patient p = new Patient();
 					String dob = req.getParameter("dob");
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -71,6 +87,11 @@ public class PatientServlet extends HttpServlet {
 
 					resp.sendRedirect(
 							"patients.jsp?msg=Patient " + p.getFname() + " " + p.getLname() + " Added Successfully");
+				} else if(ch==1)
+				{
+					resp.sendRedirect(
+							"patients.jsp?msg=Error! Email Already Exist");
+				}
 				} else if (type.equals("delete")) {
 					pDao.delete(req.getParameter("patientid"));
 					resp.sendRedirect("patients.jsp?msg=Patient " + req.getParameter("patientid") + " Removed");
@@ -97,5 +118,4 @@ public class PatientServlet extends HttpServlet {
 			resp.sendRedirect("error.jsp?msg=" + e.getMessage());
 		}
 	}
-
 }
