@@ -167,7 +167,7 @@
 													<input type=text name='email' placeholder="Email ID" class='form-control' required="required"/>
 													<br/>
 													<label>Patient Mobile</label>
-													<input type=text name='mobile' placeholder="Mobile" class='form-control' required="required"/>
+													<input type=number pattern=".{10}" maxlength="10" oninput="this.value=this.value.replace(/[^0-9]/g,'');" name='mobile' placeholder="Mobile" class='form-control' required="required"/>
 													<br/>
 									      </div>
 									      <div class="modal-footer">
@@ -265,7 +265,7 @@
 																		<input value='<%=p.getEmail() %>' type=text name='email' placeholder="Email ID" class='form-control' required="required"/>
 																		<br/>
 																		<label>Patient Mobile</label>
-																		<input value='<%=p.getMobile() %>' type=text name='mobile' placeholder="Mobile" class='form-control' required="required"/>
+																		<input value='<%=p.getMobile() %>' type=number name='mobile' placeholder="Mobile" class='form-control' required="required"/>
 																		<br/>
 														      </div>
 														      <div class="modal-footer">
