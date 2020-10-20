@@ -117,7 +117,7 @@
 								   }
 								%>
 
-								<form method="post" action="account" >
+								<form method="post" action="account"  >
 									<input type="hidden" name='request_type' value='register' /> <label>Email:</label>
 									<input type="text" name="email" class="form-control" /> <br />
 									<label>Password:</label> <input type="password" name="password"
@@ -127,14 +127,21 @@
 										name="lname" class="form-control" /> <br /> <label>Gender:</label>
 									<br /> <input type="radio" name='gender' value='Male' /> Male
 									<input type="radio" name='gender' value='Female' /> Female <br />
-									<br /> <label>Mobile:</label> <input type="text" name="mobile"
-										class="form-control" /> <br /> <label>Address:</label>
+									<br /> <label>Mobile:</label> <input type="text" id="phoneno"
+									name="mobile" pattern="[0-9]{10}" required /> <br />
+									<script>
+										document.getElementById("phoneno").addEventListener("invalid", myFunction);
+										function myFunction()
+										{
+											     alert("Please enter 10 digit Number!!!");
+										}
+									</script>
+									<label>Address:</label>
 									<textarea name="addr" rows=3 class="form-control"></textarea>
 									<br />
 									<br />
 									<button class="btn btn-primary py-3 px-4" type="submit">Register</button>
 								</form>
-								
 							</div>
 						</div>
 					</div>
@@ -142,6 +149,7 @@
 			</div>
 		</div>
 	</section>
+
 
 
 

@@ -167,9 +167,15 @@
 													<input type=text name='email' placeholder="Email ID" class='form-control' required="required"/>
 													<br/>
 													<label>Patient Mobile</label>
-													<input type=text name='mobile' placeholder="Mobile" class='form-control' required="required"/>
+													<input type=text name='mobile' id="mobno"  pattern="[0-9]{10}" required="required"/>
 													<br/>
-									      </div>
+													<script>
+													document.getElementById("mobno").addEventListener("invalid", myFunction);
+													function myFunction() {
+															alert("Please enter 10 digit Number!!!");
+													}
+												    </script>
+										      </div>
 									      <div class="modal-footer">
 									        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 									        <button type="submit" class="btn btn-success"><span class="icon-plus"></span> Add Patient</button>
