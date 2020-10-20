@@ -1,3 +1,4 @@
+
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.phr.model.Patient"%>
 <%@page import="java.util.List"%>
@@ -167,7 +168,7 @@
 													<input type=text name='email' placeholder="Email ID" class='form-control' required="required"/>
 													<br/>
 													<label>Patient Mobile</label>
-													<input type=text name='mobile' placeholder="Mobile" class='form-control' required="required"/>
+													<input type=text name='mobile' placeholder="Mobile" class='form-control' pattern="[6789]{1}[0-9]{9}" maxlength="10" required="required"/>
 													<br/>
 									      </div>
 									      <div class="modal-footer">
