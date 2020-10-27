@@ -124,6 +124,9 @@ public class RecordServlet extends HttpServlet
                d.setData(req.getParameter("data"));
                d.setPatientID(req.getParameter("patientid"));
                d.setEntry_time(new Timestamp(System.currentTimeMillis()));
+               String msg ="Dr. " +user.getFname()+ "have responded to your query. Please login to PHR portal to view";
+               String mobile =pDao.get(req.getParameter("patientid")).getMobile();
+               SendMessage.sendSms(mobile,msg);
                dDao.write(d);
                resp.sendRedirect("record?reqtype=read&patientid="+d.getPatientID());
             }
